@@ -9,9 +9,11 @@ export default function Todos({todos, filter, completedTask, deleteTodo}) {
     switch (filter){
       case 'all':
         filteredTodos = [...todos]
+
         break
       case 'completed':
         filteredTodos = todos.filter(todo => todo.completed)
+  
         break
       case 'active':
         filteredTodos = todos.filter(todo => !todo.completed )
@@ -34,7 +36,7 @@ const filteredTodos = useMemo(() => filterTodos(filter),[todos, filter]);
   return (
     <ul>
     {filteredTodos.map(todo => 
-    <Todo todo={todo} completedTask={completedTask} deleteTodo={deleteTodo}
+    <Todo todo={todo} completedTask={completedTask} deleteTodo={deleteTodo} 
     />)}
     </ul>
 

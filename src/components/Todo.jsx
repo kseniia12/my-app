@@ -1,19 +1,34 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-export default function Todo({todo, completedTask, deleteTodo}) {
+import { faTimes, faRemove } from '@fortawesome/free-solid-svg-icons';
+import { Li, Crug, Crug1, InputСircle, InputСircle1} from "./styles/style";
+export default function Todo({todo, completedTask, deleteTodo, }) {
+  const [mouseOver, setMouseOver] = useState(false)
   return (
-    <li style={{marginLeft: "300px", backgroundColor: "#9e9b9b", maxWidth: "150px"}}>
-
-            
-              <div style={{backgroundColor:"#000000", width: '20px', height: '20px'}} onClick={()=>completedTask(todo.id)}></div>
+    <Li 
+    onMouseEnter={()=>setMouseOver(true)}
+    onMouseLeave={()=>setMouseOver(false)}
+    >
+ {todo.completed == true ? 
+            <InputСircle1>
+           <Crug1 onClick={()=>completedTask(todo.id)}></Crug1> 
+              
               <div key={todo.id}>
                     {todo.text}
                </div>
-              <FontAwesomeIcon icon={faTimes} style={{marginLeft: "80px"}} onClick={()=>deleteTodo(todo.id)}/> 
-                
-                
+               </InputСircle1> :    <InputСircle>
+           <Crug onClick={()=>completedTask(todo.id)}></Crug> 
+              
+              <div key={todo.id}>
+                    {todo.text}
+               </div>
+               </InputСircle> 
+}
 
-    </li>
+
+               {mouseOver && (
+                <FontAwesomeIcon icon={faTimes} onClick={()=>deleteTodo(todo.id)}/> 
+               )}
+    </Li>
   )
 }

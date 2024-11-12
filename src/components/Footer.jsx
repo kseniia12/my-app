@@ -1,13 +1,15 @@
 import React from 'react'
-
-export default function Footer({ todos, getFilteredTodos }) {
-    console.log(todos)
+import { FooterSection, FooterButton, Button, Button1 } from "./styles/style";
+export default function Footer({ todos, getFilteredTodos, filter, clear, countCompleted  }) {
   return (
-    <>
+    <FooterSection>
     <div> {todos.length} item left</div>
-    <button onClick={()=>getFilteredTodos('all')}>All</button>
-    <button onClick={()=>getFilteredTodos('active')}>Active</button>
-    <button onClick={()=>getFilteredTodos('completed')}>Completed</button>
-    </>
+    <FooterButton  >
+      {filter ==="all" ?  <Button1 onClick={()=>getFilteredTodos('all')}>All</Button1> :  <Button onClick={()=>getFilteredTodos('all')}>All</Button>}
+      {filter ==="active" ?  <Button1 onClick={()=>getFilteredTodos('active')}>Active</Button1> : <Button onClick={()=>getFilteredTodos('active')}>Active</Button>}
+      {filter ==="completed" ?   <Button1 onClick={()=>getFilteredTodos('completed')}>Completed</Button1>:   <Button onClick={()=>getFilteredTodos('completed')}>Completed</Button>}
+    </FooterButton>
+    {countCompleted!= 0 ? (<Button onClick={clear}>Clear Completed</Button>) : (<Button onClick={clear}></Button>)}
+    </FooterSection>
   )
 }
