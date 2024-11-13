@@ -1,38 +1,28 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, {useEffect, useMemo} from 'react'
 import Todo from './Todo'
 
-export default function Todos({todos, filter, completedTask, deleteTodo}) {
-  // const [filteredTodos, setFilteredTodos] = useState([]);
-
+export default function Todos({todos, filter, completedTask, deleteTodo, checkIsComleted}) {
   const filterTodos = (filter) => {
     let filteredTodos = [];
     switch (filter){
       case 'all':
         filteredTodos = [...todos]
-
         break
       case 'completed':
         filteredTodos = todos.filter(todo => todo.completed)
-  
         break
       case 'active':
         filteredTodos = todos.filter(todo => !todo.completed )
         break
     }
     return filteredTodos
-    // setFilteredTodos(filteredTodos);
   }
-
-//   useEffect(() => {
-//     filterTodos()
-//   }, [todos, filter]
-// );
+  useEffect(() => {
+    checkIsComleted()
+  }, [todos]
+);
 
 const filteredTodos = useMemo(() => filterTodos(filter),[todos, filter]);
-
-
-
-
   return (
     <ul>
     {filteredTodos.map(todo => 
